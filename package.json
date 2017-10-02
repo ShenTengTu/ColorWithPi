@@ -1,0 +1,27 @@
+{
+  "name": "color-with-pi",
+  "version": "1.0.0",
+  "description": "Each six numbers of digits of Pi to represent a hex color code.",
+  "scripts": {
+    "serve": "node liveReloadServer.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@ShenTengTu:ShanTengTu/ColorWithPi.git"
+  },
+  "keywords": [
+    "Pi"
+  ],
+  "author": "ShenTengTu",
+  "license": "MIT",
+  "devDependencies": {
+    "chalk": "^2.1.0",
+    "connect": "^3.6.5",
+    "connect-livereload": "^0.6.0",
+    "livereload": "^0.6.2",
+    "open": "0.0.5",
+    "serve-static": "^1.13.1",
+    "yargonaut": "^1.1.2",
+    "yargs": "^9.0.1"
+  }
+}

@@ -1,23 +1,3 @@
-/*edit for asynchronous computations*/
-this.SpigotPi.prototype.step = function (n) {
-    if (n > 0)
-        for (var i = 0; i < n; ++i) {
-            var _this = this;
-            var pm = new Promise(function (resolve, reject) {
-                resolve(i);
-            });
-            pm.then(function (v) {
-                window.setTimeout(function () {
-                    _this.next_();
-                }, 1);
-            });
-
-        }
-    else
-        this.next_();
-};
-/**/
-
 /*for fixed bar effact*/
 var canvas = document.getElementById("canvas");
 var control = document.getElementById("control");
@@ -49,17 +29,22 @@ function getPiDigits(n) {
     var str = "";
     var count = 0;
     var spigot = new SpigotPi(toDo);
-    spigot.step(n + 1);
+    var timeOut = window.setTimeout(function () {spigot.next_();},0);
 
     function toDo(digit) {
         var curr = spigot.digits();
-        if (curr !== 0) {
+        window.clearTimeout(timeOut);
+        if (curr === 0) {
+            timeOut = window.setTimeout(function () {spigot.next_();},0);
+        }
+        if (curr > 0 && curr <= n) {
             str += String(digit);
             if (str.length === 6) {
                 toDraw(str, count);
                 str = "";
                 count++;
             }
+            timeOut = window.setTimeout(function () {spigot.next_();},0);
         }
         if (curr === n) {
             disableForm(false);
@@ -100,7 +85,7 @@ function setSvgSize(i) {
     node_svg.setAttribute("height", (dotr * 2 + dotGap) * (Math.ceil((i + 1) / column) + 1));
 
 
-    window.scrollTo(0, node_svg.scrollHeight);
+    window.scrollTo(0, canvas.scrollHeight);
     run.textContent = "Wait..." + Math.ceil(i / dotNumber * 100) + "%";
 }
 
@@ -132,7 +117,7 @@ function createSVGDownloadLink() {
     var link = "data:image/svg+xml;base64,\n" + base64SVG;
     var fileName = "ColorWithPi_Dots+" + dotNumber + ".svg";
     run.insertAdjacentHTML("afterend", "<a id='downloadLink' download='" + fileName + "' href-lang='image/svg+xml'href='" + link + "' style='display:none;'></a>" +
-            "<button id='download'>Download</button>");
+            "<button id='download'>Download SVG</button>");
     var downloadLink = document.querySelector("#downloadLink");
     var download = document.querySelector("#download");
     download.onclick = function () {

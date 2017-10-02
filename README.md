@@ -1,8 +1,12 @@
 # ColorWithPi
-Each six numbers of digits represent a hex color code.See the [demo](http://demo.shentengtu.idv.tw/color_with_pi).
+Each six numbers of digits represent a hex color code.
+Demo:https://shentengtu.github.io/ColorWithPi/
 You can adjust parameters and download .svg of result.
 
 # Instruction
+\[2017/10/02\]
+Use GitHub Page to host demo.
+
 \[2016/11/06\]
 
 Use [Unbounded Spigot Algorithms](http://www.cs.ox.ac.uk/jeremy.gibbons/publications/spigot.pdf) to calculate PI.
